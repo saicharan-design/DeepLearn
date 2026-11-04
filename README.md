@@ -5,6 +5,7 @@ DeepLearn keeps its existing Flask backend and frontend features:
 - Explain-it-back feedback
 - AI-generated PYQ-style practice
 - Faculty topic counts (topic counters only; student question text is not stored)
+- URL for DeepLearn AI -- https://deeplearn-ch5a.onrender.com/
 
 ## AI provider fallback
 
