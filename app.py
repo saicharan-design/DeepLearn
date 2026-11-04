@@ -51,7 +51,7 @@ def provider_order():
 
 def provider_models():
     return {
-        "gemini": os.environ.get("GEMINI_MODEL", "gemini-2.5-flash-lite").strip(),
+        "gemini": os.environ.get("GEMINI_MODEL", "gemini-3.8-flash").strip(),
         "groq": os.environ.get("GROQ_MODEL", "llama-3.3-70b-versatile").strip(),
         # OpenRouter's free router chooses an available free chat model.
         "openrouter": os.environ.get("OPENROUTER_MODEL", "openrouter/free").strip(),
