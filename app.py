@@ -23,7 +23,7 @@ def api_key():
 
 def model_chain():
     """GEMINI_MODEL first, then fallbacks. Each model has its own free quota."""
-    names = [os.environ.get("GEMINI_MODEL", "").strip(), "gemini-2.5-flash-lite", "gemini-2.5-flash", "gemini-2.0-flash"]
+    names = [os.environ.get("GEMINI_MODEL", "").strip(), "gemini-2.5-flash-lite", "gemini-2.5-flash", "gemini-2.0-flash", "gemini-3.8-flash"]
     return list(dict.fromkeys(n for n in names if n))
 
 
