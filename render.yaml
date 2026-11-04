@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: deeplearn
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --workers 1 --threads 4 --timeout 120
+    healthCheckPath: /healthz
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.3
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-2.5-flash-lite
+      - key: GROQ_MODEL
+        value: llama-3.3-70b-versatile
+      - key: OPENROUTER_MODEL
+        value: openrouter/free
+      - key: AI_PROVIDER_ORDER
+        value: gemini,groq,openrouter
+      - key: FACULTY_KEY
+        generateValue: true
