@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DeepLearn: Doubt Solver and practice that make you think</title>
+<meta name="description" content="DeepLearn is a Doubt Solver that gives hints first, then exam-style practice questions, and shows teachers where students struggle.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Sora:wght@600;700&display=swap">
+<style>
+:root{--ink:#1B1B4B;--text:#3A3A66;--mute:#5A5C86;--bg:#F4F6FF;--card:#fff;--line:#DDE2F7;--coral:#F2603C;--soft:#FFE3DA;--night:#1B1B4B}
+@media (prefers-color-scheme:dark){:root{--ink:#F2F3FF;--text:#C9CCF5;--mute:#A3A7D9;--bg:#10103A;--card:#1A1A52;--line:#2E2E6A;--soft:#3A2230}}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:84px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--text);font:17px/1.65 'DM Sans',system-ui,sans-serif}
+h1,h2,h3{font-family:'Sora',system-ui,sans-serif;color:var(--ink);line-height:1.15;margin:0}
+h2{font-size:clamp(30px,4vw,44px)}h3{font-size:21px;margin-bottom:8px}p{margin:0}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+.sec{padding:88px 0}
+header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:68px;flex-wrap:wrap}
+.logo{font:700 22px 'Sora',sans-serif;color:var(--ink);text-decoration:none;display:flex;gap:10px;align-items:center}
+.links{display:flex;gap:22px;flex-wrap:wrap}.links a{color:var(--text);text-decoration:none;font-weight:500}.links a:hover{color:var(--ink);text-decoration:underline}
+.btn{display:inline-block;font:700 16px 'DM Sans',sans-serif;border:0;border-radius:999px;padding:13px 26px;min-height:48px;cursor:pointer;text-decoration:none;background:var(--ink);color:var(--bg)}
+.btn.coral{background:var(--coral);color:#1B1B4B}.btn.ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 2px var(--ink)}.btn:disabled{opacity:.5;cursor:wait}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--coral);outline-offset:3px}
+.hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:56px;align-items:center;padding:72px 0 88px}
+.hero h1{font-size:clamp(40px,6vw,66px);margin-bottom:22px}.hero .sub{font-size:20px;max-width:520px;margin-bottom:30px}
+.chat{background:var(--night);border-radius:28px;padding:26px;display:flex;flex-direction:column;gap:14px}
+.bub{border-radius:18px;padding:14px 18px;font-size:16px;line-height:1.5;max-width:92%}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:28px}
+.card p{color:var(--text)}
+.ico{width:48px;height:48px;border-radius:14px;background:var(--soft);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.ico svg{stroke:var(--ink)}
+.lead{max-width:640px;margin:14px 0 40px}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;counter-reset:s}
+.steps .card{counter-increment:s}.steps .card::before{content:counter(s);display:flex;width:40px;height:40px;border-radius:50%;background:var(--coral);color:#1B1B4B;font:700 18px 'Sora';align-items:center;justify-content:center;margin-bottom:16px}
+.dark{background:var(--night);color:#C9CCF5}.dark h2,.dark h3{color:#fff}
+label{display:block;font-weight:700;color:var(--ink);margin:16px 0 6px}
+input,textarea{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:14px;padding:12px 14px}
+textarea{min-height:100px;resize:vertical}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.out{margin-top:20px;padding:16px 20px;border-radius:16px;background:var(--soft);color:var(--ink);white-space:pre-wrap}
+.err{color:#B3261E;font-weight:700;margin-top:12px}
+.bar{height:12px;border-radius:99px;background:var(--line);overflow:hidden;margin:6px 0 18px}.bar i{display:block;height:100%;background:var(--coral)}
+.band{display:flex;flex-wrap:wrap;gap:28px;align-items:center;justify-content:space-between;background:var(--soft);border-radius:24px;padding:36px}.band h2{font-size:clamp(26px,3.4vw,36px);margin-bottom:10px}.band div{max-width:700px}
+footer{border-top:1px solid var(--line);padding:36px 0;color:var(--mute);font-size:14px;text-align:center}
+[hidden]{display:none!important}
+select{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:2px solid var(--line);border-radius:14px;padding:12px 14px;min-height:48px}
+select:focus-visible{outline:3px solid var(--coral);outline-offset:3px}
+.q{background:var(--bg);border:1px solid var(--line);border-radius:18px;padding:20px;margin-top:16px}
+.q p{color:var(--ink);font-weight:500}.q small{color:var(--mute)}
+details{margin-top:10px}summary{cursor:pointer;font-weight:700;color:var(--ink)}details p{margin-top:8px;white-space:pre-wrap;color:var(--text);font-weight:400}
+.note{margin-top:14px;font-size:14px;color:var(--mute)}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+<a class="logo" href="#top"><svg width="32" height="32" viewBox="0 0 34 34" fill="none" aria-hidden="true"><circle cx="17" cy="17" r="15" stroke="currentColor" stroke-width="3"/><circle cx="17" cy="17" r="9" stroke="#F2603C" stroke-width="3"/><circle cx="17" cy="17" r="3.5" fill="currentColor"/></svg>DeepLearn</a>
+<nav class="links" aria-label="Main"><a href="#solver">Doubt Solver</a><a href="#pyq">PYQ practice</a><a href="#how">How it works</a><a href="#faculty">For faculty</a></nav>
+<a class="btn coral" href="#solver">Ask a doubt</a>
+</div></header>
+
+<main id="top">
+<div class="wrap hero">
+<div>
+<h1>Stuck? Get a hint, not a shortcut.</h1>
+<p class="sub">The DeepLearn Doubt Solver helps you work it out yourself. Hints come first. The full solution unlocks after you try, and then you explain it back.</p>
+<div class="row"><a class="btn coral" href="#solver">Open the Doubt Solver</a><a class="btn ghost" href="#pyq">Practice questions</a></div>
+</div>
+<div class="chat" aria-label="Example conversation">
+<div class="bub" style="background:#2E2E7A;color:#fff;align-self:flex-end">Why does binary search need a sorted array?</div>
+<div class="bub" style="background:#fff;color:#1B1B4B"><strong>Try this first:</strong> if you check the middle of an unsorted list and it is too big, what can you say about the left half?</div>
+<div style="color:#C9CCF5;font-size:14px">The full solution unlocks after your attempt.</div>
+</div>
+</div>
+
+<section class="sec" id="solver" style="background:var(--card);border-block:1px solid var(--line)"><div class="wrap">
+<h2>Doubt Solver</h2><p class="lead">Name the topic, write your doubt, and take it one hint at a time.</p>
+<div class="cols">
+<div class="card" style="background:var(--bg)">
+<h3>1. Ask your doubt</h3>
+<label for="topic">Topic</label><input id="topic" maxlength="60" placeholder="e.g. Binary search">
+<label for="q">Your doubt</label><textarea id="q" placeholder="What are you stuck on?"></textarea>
+<div class="row"><button class="btn coral" id="hint">Get a hint</button></div>
+<div class="out" id="sOut" hidden></div>
+<div class="row" id="more" hidden><button class="btn ghost" id="bigger">Bigger hint</button><button class="btn ghost" id="ready">I’ve tried. Show the solution</button></div>
+<div id="attemptBox" hidden><label for="attempt">What have you tried so far?</label><textarea id="attempt" placeholder="Write your attempt. The solution unlocks after this."></textarea><div class="row"><button class="btn coral" id="unlock">Unlock the solution</button></div></div>
+<div class="err" id="sErr" role="alert"></div>
+</div>
+<div class="card" style="background:var(--bg)">
+<h3>2. Explain it back</h3>
+<p>After the solution, write it in your own words. You get feedback and a “why” question.</p>
+<label for="expl">Your explanation</label><textarea id="expl"></textarea>
+<div class="row"><button class="btn coral" id="check">Check my explanation</button></div>
+<div class="out" id="eOut" hidden></div>
+<div class="err" id="eErr" role="alert"></div>
+</div>
+</div>
+<p class="note">Answers are written by AI and can be wrong. Check them against your notes or textbook. Do not type private information.</p>
+</div></section>
+
+<section class="sec" id="pyq"><div class="wrap">
+<h2>PYQ-style practice</h2><p class="lead">Pick a topic and get exam-style questions with marks, a hint and an answer you can reveal.</p>
+<div class="card">
+<div class="grid2">
+<div><label for="ptopic">Topic</label><input id="ptopic" maxlength="80" placeholder="e.g. Sorting algorithms"></div>
+<div><label for="pdiff">Difficulty</label><select id="pdiff"><option value="easy">Easy</option><option value="medium" selected>Medium</option><option value="hard">Hard</option></select></div>
+<div><label for="pcount">Questions</label><select id="pcount"><option>3</option><option selected>5</option><option>8</option></select></div>
+</div>
+<div class="row"><button class="btn coral" id="gen">Generate questions</button></div>
+<div class="err" id="pErr" role="alert"></div>
+<div id="pOut"></div>
+<p class="note">These are AI-generated practice questions in the style of past papers. They are not real past papers.</p>
+</div>
+</div></section>
+
+<section class="sec" id="how" style="padding-top:0"><div class="wrap">
+<h2>How it works</h2><p class="lead">Built around what educators worry about: weaker critical thinking, less group learning and shortcut learning.</p>
+<div class="steps">
+<div class="card"><h3>Ask</h3><p>Type your doubt and name the topic.</p></div>
+<div class="card"><h3>Hint first</h3><p>Start small. Ask for a bigger hint if you need one. The server blocks the full solution until you write an attempt.</p></div>
+<div class="card"><h3>Explain it back</h3><p>Restate the idea in your own words, then answer a “why” follow-up.</p></div>
+</div>
+<p class="note">Group quiz mode is on the roadmap. It is not built yet.</p>
+</div></section>
+
+<section class="sec dark" id="faculty"><div class="wrap hero" style="padding-block:0">
+<div><h2>Teachers see where students struggle</h2><p style="margin-top:18px;max-width:480px">The class view lists the most-asked topics with counts only. It never shows what students typed. Counts reset when the server restarts.</p></div>
+<div class="card" style="background:#fff;color:#3A3A66">
+<h3 style="color:#1B1B4B">Class view</h3>
+<label for="fkey" style="color:#1B1B4B">Faculty key</label><input id="fkey" type="password" autocomplete="off" style="background:#F4F6FF;color:#1B1B4B;border-color:#DDE2F7">
+<div class="row"><button class="btn" id="load" style="background:#1B1B4B;color:#fff">Load class view</button></div>
+<div id="fOut" style="margin-top:22px;color:#1B1B4B"></div>
+<div class="err" id="fErr" role="alert"></div>
+</div></div></section>
+
+<section class="sec"><div class="wrap">
+<div class="band"><div><h2>Want firm limits? Use practice-only mode.</h2><p>Colleges can keep DeepLearn for practice while graded work stays AI-free, with vivas, in-class problem solving and written tests.</p></div><a class="btn" href="#solver">Try it first</a></div>
+</div></section>
+</main>
+<footer><div class="wrap">DeepLearn is a concept created for a Critical Thinking assignment using the Six Thinking Hats.</div></footer>
+
+<script>
+const $ = id => document.getElementById(id);
+async function api(url, body, headers = {}) {
+  const r = await fetch(url, body ? { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) } : { headers });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw new Error(j.error || "Something went wrong. Try again.");
+  return j;
+}
+async function run(btn, errEl, fn) {
+  errEl.textContent = ""; btn.disabled = true;
+  try { await fn(); } catch (e) { errEl.textContent = e.message; }
+  btn.disabled = false;
+}
+async function ask(level, btn) {
+  await run(btn, $("sErr"), async () => {
+    const j = await api("/api/chat", { topic: $("topic").value, question: $("q").value, level, attempt: level === 3 ? $("attempt").value : "" });
+    $("sOut").hidden = false; $("sOut").textContent = j.reply;
+    $("more").hidden = level === 3; $("attemptBox").hidden = true;
+    if (level === 3) $("expl").focus();
+  });
+}
+$("hint").onclick = () => ask(1, $("hint"));
+$("bigger").onclick = () => ask(2, $("bigger"));
+$("ready").onclick = () => { $("attemptBox").hidden = false; $("attempt").focus(); };
+$("unlock").onclick = () => ask(3, $("unlock"));
+$("check").onclick = () => run($("check"), $("eErr"), async () => {
+  const j = await api("/api/explain-back", { concept: ($("topic").value + ": " + $("q").value).slice(0, 300), explanation: $("expl").value });
+  const label = { solid: "Solid understanding.", partial: "Getting there.", needs_work: "Needs another look." }[j.verdict] || "";
+  $("eOut").hidden = false;
+  $("eOut").textContent = `${label}\n\n${j.feedback}${j.followUp ? `\n\nThink about this: ${j.followUp}` : ""}`;
+});
+$("gen").onclick = () => run($("gen"), $("pErr"), async () => {
+  const j = await api("/api/pyq", { topic: $("ptopic").value, difficulty: $("pdiff").value, count: Number($("pcount").value) });
+  const box = $("pOut"); box.textContent = "";
+  j.questions.forEach((q, i) => {
+    const d = document.createElement("div"); d.className = "q";
+    const p = document.createElement("p"); p.textContent = `Q${i + 1}. ${q.question}`;
+    const m = document.createElement("small"); m.textContent = `${q.marks} marks`;
+    d.append(p, m);
+    [["Show hint", q.hint], ["Show answer", q.answer]].forEach(([t, txt]) => {
+      const det = document.createElement("details"), s = document.createElement("summary"), a = document.createElement("p");
+      s.textContent = t; a.textContent = txt; det.append(s, a); d.appendChild(det);
+    });
+    box.appendChild(d);
+  });
+});
+$("load").onclick = () => run($("load"), $("fErr"), async () => {
+  const j = await api("/api/faculty", null, { "x-faculty-key": $("fkey").value });
+  const box = $("fOut"); box.textContent = "";
+  if (!j.topics.length) { box.textContent = "No activity yet. Topics appear after students start studying."; return; }
+  j.topics.forEach(t => {
+    const row = document.createElement("div");
+    const name = document.createElement("strong"); name.textContent = `${t.topic}: ${t.total} uses, ${t.struggle}% needed extra help, ${t.practice} practice sets`;
+    const bar = document.createElement("div"); bar.className = "bar";
+    const fill = document.createElement("i"); fill.style.width = t.struggle + "%"; bar.appendChild(fill);
+    row.append(name, bar); box.appendChild(row);
+  });
+});
+</script>
+</body>
+</html>
